@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 function weatherLabel(code){//weather marks
-  if(code === 0) return "☀️"
-  if(code <=3 ) return ""
-  if(code <=48) return ""
-  if(code <=67) return ""
-  if(code <=77) return ""
-  if(code <=82) return ""
-  if(code <=99) return ""
+  if(code === 0) return "☀️ Clear"
+  if(code <=3 ) return "🌤️ Cloudy"
+  if(code <=48) return "🌫️ Fog"
+  if(code <=67) return "☔ rain"
+  if(code <=77) return "❄️ Snow"
+  if(code <=82) return "🌦 Showers"
+  if(code <=99) return "⛈️ ThunderStrom"
   return "Unknown" 
 };
 
@@ -88,7 +88,7 @@ export default function App() {
             <h2 style={{ margin: "0 0 8px" }}>{weather.city}</h2>
             <p>Temperature: {weather.temp} °C</p>
             <p>Wind: {weather.wind} m/s</p>
-            <p>Weather code: {weather.code}</p>
+            <p>Weather: {weatherLabel(weather.code)}</p>
           </div>
         )}
       </div>
