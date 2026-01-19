@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+function weatherLabel(code){//weather marks
+  if(code === 0) return "☀️"
+  if(code <=3 ) return ""
+  if(code <=48) return ""
+  if(code <=67) return ""
+  if(code <=77) return ""
+  if(code <=82) return ""
+  if(code <=99) return ""
+  return "Unknown" 
+};
+
 export default function App() {
   const [city, setCity] = useState("Tokyo");
   const [weather, setWeather] = useState(null);
@@ -15,7 +26,7 @@ export default function App() {
     setWeather(null);
 
     try {
-      // 1) 都市名 → 緯度経度
+      // city name, longitude, latitide
       const geoRes = await fetch(
         `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
           q
@@ -30,7 +41,7 @@ export default function App() {
 
       const { latitude, longitude, name, country } = geo.results[0];
 
-      // 2) 天気取得
+      // get weather
       const wRes = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code,wind_speed_10m`
       );
